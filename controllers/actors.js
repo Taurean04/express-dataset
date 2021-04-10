@@ -67,12 +67,11 @@ var getStreakInfo = (allEvents) => {
 	const streakInfo = {};
 	allEvents.forEach((event) => {
 		const { actorId, created_at } = event;
-	  	if (streakInfo[actorId]) {
-		
-		const actorStreak = streakInfo[actorId];
-		const lastEvent = moment(actorStreak.lastEvent, 'YYYY-MM-DD');
-		const currentEvent = moment(created_at, 'YYYY-MM-DD');
-		const daysDifference = lastEvent.diff(currentEvent, 'days');
+	  	if (streakInfo[actorId]) {		
+			const actorStreak = streakInfo[actorId];
+			const lastEvent = moment(actorStreak.lastEvent, 'YYYY-MM-DD');
+			const currentEvent = moment(created_at, 'YYYY-MM-DD');
+			const daysDifference = lastEvent.diff(currentEvent, 'days');
 			if (daysDifference === 1) {
 				actorStreak.currentStreak += 1;
 				if (actorStreak.currentStreak > actorStreak.highestStreak) {
@@ -143,7 +142,6 @@ var getStreak = async (req, res) => {
         res.status(500).json({message: 'Error occurred', e});
 	}
 };
-
 
 module.exports = {
 	updateActor: updateActor,
