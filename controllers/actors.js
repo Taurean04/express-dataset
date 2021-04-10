@@ -4,7 +4,7 @@ const _ = require('lodash');
 const Actor = require('../models/Actor');
 const Event = require('../models/Event');
 
-var getAllActors = () => {
+var getAllActors = async (req, res) => {
 	try{
 		const actors = await Actor.findAll({
 			attributes: {
@@ -39,7 +39,7 @@ var getAllActors = () => {
 	}
 };
 
-var updateActor = () => {
+var updateActor = async (req, res) => {
 	try {
 		const { avatar_url, id, login } = req.body;
 		const actorInDB = await Actor.findByPk(id);
@@ -111,7 +111,7 @@ var getStreakInfoArray = streakInfo => Object.keys(streakInfo).map(actorId => ({
   
 var getActorsIdByStreak = sortedStreakInfo => sortedStreakInfo.map(info => Number(info.actorId));
 
-var getStreak = () => {
+var getStreak = async (req, res) => {
 	try{
 		const allEvents = await Event.findAll({
 			include: [Actor],

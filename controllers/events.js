@@ -2,7 +2,7 @@ const Event = require('../models/Event');
 const Actor = require('../models/Actor');
 const Repo = require('../models/Repo');
 
-var getAllEvents = () => {
+var getAllEvents = async (req, res) => {
 	try {
 		const events = await Event.findAll({
 			attributes: {
@@ -58,7 +58,7 @@ var createRepo = async (repo) => {
 	});
 };
 
-var addEvent = () => {
+var addEvent = async (req, res, next) => {
 	try {
 		const {
 			id, actor, repo,
@@ -87,7 +87,7 @@ var addEvent = () => {
 };
 
 
-var getByActor = () => {
+var getByActor = async (req, res) => {
 	try {
 		const { id } = req.params;
 		const events = await Event.findAll({
@@ -117,7 +117,7 @@ var getByActor = () => {
 };
 
 
-var eraseEvents = () => {
+var eraseEvents = async (req, res) => {
 	try {
 		await Promise.all([
 			Event.destroy({
